@@ -13,17 +13,18 @@ client = OpenAI(
 EMBED_MODEL = "BAAI/bge-m3"
 
 
-def embed_texts(texts, batch_size=16):
+def embed_texts(texts, batch_size=16, verbose=True):
     """把一批文本转成向量，返回 list[list[float]]"""
     vectors = []
     for i in range(0, len(texts), batch_size):
         batch = texts[i:i + batch_size]
         resp = client.embeddings.create(model=EMBED_MODEL, input=batch)
         vectors.extend([d.embedding for d in resp.data])
-        print(f"  已完成 {min(i + batch_size, len(texts))}/{len(texts)}")
+        if verbose:
+            print(f"  已完成 {min(i + batch_size, len(texts))}/{len(texts)}")
     return vectors
 
 
 def embed_one(text):
-    """单条文本转向量"""
-    return embed_texts([text])[0]
+    """单条文本转向量（不打印进度）"""
+    return embed_texts([text], verbose=False)[0]
