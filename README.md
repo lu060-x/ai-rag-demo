@@ -4,7 +4,7 @@
 
 ## 🔗 在线 Demo
 
-部署完成后把链接填在这里。
+https://equipment-rag.streamlit.app/
 
 ## 核心功能
 
