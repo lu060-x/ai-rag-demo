@@ -1,5 +1,13 @@
+# 虚拟环境
 venv/
-db/
 __pycache__/
-data/
+
+# 密钥（绝对不能进库）
 .env
+
+# 原始 PDF 不进库（体积大，共 5.8 MB），但保留解析结果
+data/*
+!data/pages.json
+
+# 注意：db/ 故意不忽略！
+# 向量库需要随代码一起部署，否则云端冷启动要重新调 embedding API 重建，又慢又花钱
